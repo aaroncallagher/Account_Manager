@@ -10,6 +10,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     authorize @user
+    @invoices = @user.invoices.all
+    @subscriptions = @user.subscriptions.all
   end
 
   def update

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Subcontractnumber:</strong>
+  <%= @subscription.SubContractNumber %>
+</p>
+
+<p>
+  <strong>Subexpiredate:</strong>
+  <%= @subscription.SubExpireDate %>
+</p>
+
+<p>
+  <strong>Subnotes:</strong>
+  <%= @subscription.SubNotes %>
+</p>
+
+<p>
+  <strong>Subactive:</strong>
+  <%= @subscription.SubActive %>
+</p>
+
+<p>
+  <strong>Subseatcount:</strong>
+  <%= @subscription.SubSeatCount %>
+</p>
+
+<%= link_to 'Edit', edit_subscription_path(@subscription) %> |
+<%= link_to 'Back', subscriptions_path %>

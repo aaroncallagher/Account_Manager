@@ -1,23 +1,43 @@
-<div class="authform">
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => 'form'}) do |f| %>
-    <h3>Sign up</h3>
-    <%= devise_error_messages! %>
-    <div class="form-group">
-      <%= f.label :name %>
-      <%= f.text_field :name, :autofocus => true, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-    </div>
-     <%= f.submit 'Sign up', :class => 'button right' %>
-  <% end %>
-</div>
+<body style="background-img: <%= image_path('angle/bg-for-login.jpg') %>">
+   <div class="block-center mt-xl wd-xl authform" style="padding-top: 3%;">
+      <!-- START panel-->
+      <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => 'form'}) do |f| %>
+      <div class="panel panel-dark panel-flat">
+         <div class="panel-heading text-center">
+            <%= link_to root_path do %>
+               <img src="<%= image_path('angle/logo.png') %>" alt="CAD Masters, Inc." class="block-center img-rounded" />
+            <% end %>
+         </div>
+         <div class="panel-body">
+            <p class="text-center pv">Signup to Access Your Account</p>
+            <form role="form" data-parsley-validate="" novalidate="" class="mb-lg">
+               <div class="form-group has-feedback">
+                  <%= f.label :name, class: 'text-muted' %>
+                  <%= f.text_field :name, class: 'form-control', :autofocus => true, id: 'signupInputEmail1', placeholder: 'Enter Email' %>
+               </div>
+               <div class="form-group has-feedback">
+                  <%= f.label :email, class: 'text-muted' %>
+                  <%= f.email_field :email, class: 'form-control', id: 'signupInputEmail1', placeholder: 'Enter Email' %>
+               </div>
+               <div class="form-group has-feedback">
+                  <%= f.label :password, class: 'text-muted' %>
+                  <%= f.password_field :password, class: 'form-control', id: 'signupInputPassword1', placeholder: 'Password' %>
+               </div>
+               <div class="form-group has-feedback">
+                  <%= f.label :password_confirmation, class: 'text-muted' %>
+                  <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'Confirm Password', id: 'signupInputRePassword1' %>
+               </div>
+               <div class="clearfix">
+               </div>
+               <%= f.submit 'Create Account', :class => 'btn btn-block btn-primary mt-lg' %>
+            </form>
+            <p class="pt-lg text-center">Have an account?</p>
+            <%- if devise_mapping.registerable? %>
+              <%= link_to 'Login', new_session_path(resource_name), class: 'btn btn-block btn-default'  %>
+            <% end %>
+         </div>
+      </div>
+      <% end %>
+      <!-- END panel-->
+   </div>
+</body>

@@ -1,3 +1,53 @@
-<h3>User</h3>
-<p>Name: <%= @user.name if @user.name %></p>
-<p>Email: <%= @user.email if @user.email %></p>
+<div class="row">
+   <div class="col-md-12">
+      <div class="panel panel-default">
+         <div class="panel-heading">
+            <a href="#" class="pull-right text-muted">
+               <em class="fa"></em>
+            </a>
+         </div>
+         <div class="panel-body text-center">
+            <em class="fa fa-user fa-4x text-muted"></em>
+            <h4><%= @user.name if @user.name %></h4>
+            <p><%= @user.CoAddress if @user.CoAddress %></p>
+            <p><%= @user.CoCity %>, <%= @user.CoState %> <%= @user.CoZip %></p>
+         </div>
+         <div class="panel-footer clearfix">
+            <div class="row row-table">
+             <div class="col-xs-4 br">
+                <h3 class="m0"><%= @user.invoices.count %></h3>
+                <p class="m0">
+                   <span class="hidden-xs">Total</span>
+                   <span>Invoices</span>
+                </p>
+             </div>
+             <div class="col-xs-4 br">
+                <h3 class="m0"><%= @invoices.where(IBalDue: (1..9999999)).count %></h3>
+                <p class="m0">Unpaid Invoices</p>
+             </div>
+             <div class="col-xs-4">
+                <h3 class="m0"><%= @user.InName %></h3>
+                <p class="m0">Your CADMasters Sales Rep</p>
+             </div>
+          </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12"><h3>Invoices</h3></div>
+</div>
+
+<% if @user.invoices.any? %>
+    <%= render @invoices %>
+<% end %>
+
+<div class="row">
+    <div class="col-md-12"><h3>Subscriptions</h3></div>
+</div>
+
+
+<% if @user.subscriptions.any? %>
+    <%= render @subscriptions %>
+<% end %>

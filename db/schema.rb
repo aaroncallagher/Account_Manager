@@ -10,7 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150101174918) do
+ActiveRecord::Schema.define(version: 20161230235509) do
+
+  create_table "invoices", force: :cascade do |t|
+    t.integer  "InvNo"
+    t.string   "IDesc"
+    t.date     "IDate"
+    t.float    "ITotal"
+    t.float    "IPaidAmount"
+    t.float    "IBalDue"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.date     "IDatePaid"
+    t.string   "InvNum"
+    t.index ["user_id", "created_at"], name: "index_invoices_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_invoices_on_user_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.string   "status"
+    t.float    "amount"
+    t.string   "transaction_number"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.string   "SubContractNumber"
+    t.date     "SubExpireDate"
+    t.string   "SubNotes"
+    t.boolean  "SubActive"
+    t.string   "SubSeatCount"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -27,9 +62,13 @@ ActiveRecord::Schema.define(version: 20150101174918) do
     t.datetime "updated_at"
     t.string   "name"
     t.integer  "role"
+    t.string   "CoAddress"
+    t.string   "CoCity"
+    t.string   "CoState"
+    t.string   "CoZip"
+    t.string   "InName"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

@@ -1,0 +1,93 @@
+<div id="panelDemo1" class="panel panel-default">
+    <div class="panel-heading"><strong>Invoice #<%= invoice.InvNum %></strong> | <em><%= invoice.IDesc %></em>
+       <a href="#" data-tool="panel-collapse" data-toggle="tooltip" title="Collapse Panel" class="pull-right">
+          <em class="fa fa-minus"></em>
+       </a>
+    </div>
+    <div class="panel-body">
+      <h3 class="mt0">Invoice <%= invoice.InvNum %></h3>
+      <hr/>
+      <div class="row mb-lg">
+         <div class="col-lg-4 col-xs-6 br pv">
+            <div class="row">
+               <div class="col-md-2 text-center visible-md visible-lg">
+                  <em class="fa fa-user fa-4x text-muted"></em>
+               </div>
+               <div class="col-md-10">
+                  <h4><%= @user.name %></h4>
+                  <address></address><%= @user.CoAddress %>
+                  <br/><%= @user.CoCity %>, <%= @user.CoState %>
+                  <br/><%= @user.CoZip %></div>
+            </div>
+         </div>
+         <div class="col-lg-4 col-xs-6 br pv">
+            <div class="row">
+               <div class="col-md-2 text-center visible-md visible-lg">
+                  <em class="fa fa-globe fa-4x text-muted"></em>
+               </div>
+               <div class="col-md-10">
+                  <h4>CAD Masters, Inc.</h4>
+                  <address></address>1111 Civic Dr.
+                  <br/>#130
+                  <br/>Walnut Creek, CA, 94596</div>
+            </div>
+         </div>
+         <div class="clearfix hidden-md hidden-lg">
+            <hr/>
+         </div>
+         <div class="col-lg-4 col-xs-12 pv">
+            <div class="clearfix">
+               <p class="pull-left">INVOICE NO.</p>
+               <p class="pull-right mr"><%= invoice.InvNum %></p>
+            </div>
+            <div class="clearfix">
+               <p class="pull-left">Date</p>
+               <p class="pull-right mr"><%= invoice.IDate %></p>
+            </div>
+            <div class="clearfix">
+               <p class="pull-left">Due Date</p>
+               <p class="pull-right mr">30/08/2014</p>
+            </div>
+         </div>
+      </div>
+      <div class="panel panel-primary">
+         <table id="table-ex-1" class="table table-bordered table-hover">
+            <thead>
+               <tr>
+                  <th>Description</th>
+                  <th>Inv. Date</th>
+                  <th>Total</th>
+                  <th>Paid Date</th>
+                  <th>Amount Paid</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td><%= invoice.IDesc %></td>
+                  <td><%= invoice.IDate %></td>
+                  <td>$<%= invoice.ITotal %></td>
+                  <td><%= invoice.IDatePaid %></td>
+                  <td>$<%= invoice.IPaidAmount %></td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+      <div class="row">
+         <div class="col-sm-offset-8 col-sm-4 pv">
+            <div class="clearfix">
+               <p class="pull-left h3">Remaining Balance</p>
+               <p class="pull-right mr h3">$<%= invoice.IBalDue %></p>
+            </div>
+         </div>
+      </div>
+      <hr class="hidden-print" />
+      <div class="clearfix">
+         <!--<button type="button" class="btn btn-success pull-right">Pay Remaining Balance</button>--> <%= button_to "Add", new_charge_path, :class => "btn btn-success pull-right", :method => :get %>
+         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description="A month's subscription"
+          data-amount="<%= invoice.IBalDue* 100 %>"
+          data-locale="auto"></script>
+      </div>
+    </div>
+</div>
